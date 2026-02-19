@@ -80,13 +80,6 @@ export async function createJob({ title, description }) {
 }
 
 
-export async function getJob(id) {
-  const { data } = await apolloClient.query({
-    query: jobByIdQuery,
-    variables: { id },
-  });
-  return data.job;
-}
 
 export async function getJobs() {
   const query = gql`
