@@ -47,6 +47,20 @@ export const companyByIdQuery = gql`
       }
     }
   `;
+
+export const jobsByIdQuery = gql`
+    query Jobs {
+      jobs {
+        id
+        date
+        title
+        company {
+          id
+          name
+        }
+      }
+    }
+  `;
 export const jobByIdQuery = gql`
   query JobById($id: ID!) {
     job(id: $id) {
@@ -55,6 +69,15 @@ export const jobByIdQuery = gql`
   }
   ${jobDetailFragment}
 `;
+
+export const createJobMutation = gql`
+    mutation CreateJob($input: CreateJobInput!) {
+      job: createJob(input: $input) {
+        ...JobDetail
+      }
+    }
+    ${jobDetailFragment}
+  `;
 
 export async function createJob({ title, description }) {
   const mutation = gql`
